@@ -16,7 +16,13 @@ function notasValidas(notas) {
     return (
         Array.isArray(notas) &&
         notas.length === 3 &&
-        notas.every(nota => typeof nota === "number" && Number.isFinite(nota))
+        notas.every(
+            nota =>
+                typeof nota === "number" &&
+                Number.isFinite(nota) &&
+                nota >= 0 &&
+                nota <= 10
+        )
     );
 }
 
@@ -55,10 +61,10 @@ app.post("/alumnos", (req, res) => {
     }
 
     if (!notasValidas(notas)) {
-        return res.status(400).json({
-            error: "Se deben indicar exactamente tres notas numéricas"
-        });
-    }
+    return res.status(400).json({
+        error: "Se deben indicar exactamente tres notas numéricas entre 0 y 10"
+    });
+}
 
     nombre = nombre.trim();
 
@@ -142,7 +148,7 @@ app.put("/alumnos/:id", (req, res) => {
 
     if (!notasValidas(notas)) {
         return res.status(400).json({
-            error: "Se deben indicar exactamente tres notas numéricas"
+            error: "Se deben indicar exactamente tres notas numéricas entre 0 y 10"
         });
     }
 

@@ -85,3 +85,23 @@ GET {{url}}/alumnos/999
 
 ### Error - id inválido
 GET {{url}}/alumnos/abc
+
+
+### Error - nota menor que 0
+POST {{url}}/alumnos
+Content-Type: application/json
+
+{
+    "nombre": "Florencia",
+    "notas": [-1, 7, 8]
+}
+
+
+### Error - nota mayor que 10
+POST {{url}}/alumnos
+Content-Type: application/json
+
+{
+    "nombre": "Antonella",
+    "notas": [8, 11, 9]
+}
